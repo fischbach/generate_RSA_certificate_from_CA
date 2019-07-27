@@ -1,8 +1,8 @@
 name: generate_rsa_cert
-label: 3A. Generate RSA Certificate from Firewall CA
+label: 3. Generate RSA Certificate CA and SSL/TLS Service Profile
 
 description:
-  Generate RSA Certificate from On Box CA
+  Generate RSA Certificate and SSL/TLS Service Profile
 
 type: rest
 
@@ -65,7 +65,7 @@ snippets:
       - name: result
         capture_pattern: result
   - name: generate_ssltls_profile
-    path: https://{{ TARGET_IP }}/api?key={{ api_key }}&type=config&action=set&xpath=/config/shared/ssl-tls-service-profile/entry[@name='{{ CERT_NAME }} - Skillet']&element=<protocol-settings><min-version>tls1-2</min-version><max-version>max</max-version></protocol-settings><certificate>{{ CERT_NAME }}</certificate>
+    path: https://{{ TARGET_IP }}/api?key={{ api_key }}&type=config&action=set&xpath=/config/shared/ssl-tls-service-profile/entry[@name='{{ CERT_NAME }}']&element=<protocol-settings><min-version>tls1-2</min-version><max-version>max</max-version></protocol-settings><certificate>{{ CERT_NAME }}</certificate>
     output_type: xml
     outputs:
       - name: result
